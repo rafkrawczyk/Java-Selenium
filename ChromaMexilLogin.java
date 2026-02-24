@@ -42,6 +42,9 @@ public class ChromaMexilLogin {
         
         String title = chromeDriver.getTitle();
         System.out.println("Page title is: " + title);
+
+        String currentUrl = chromeDriver.getCurrentUrl();
+        System.out.println("Current URL is: " + currentUrl);
         
         chromeDriver.quit();
         
