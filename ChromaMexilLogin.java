@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class Test {
+public class ChromaMexilLogin {
     public static void main(String[] args) {
         WebDriver chromeDriver = new ChromeDriver();
         //WebDriver firefoxDriver = new FirefoxDriver();
@@ -39,6 +39,9 @@ public class Test {
         
         WebElement loginButton = chromeDriver.findElement(By.className("btn"));
         loginButton.click();
+        
+        String title = chromeDriver.getTitle();
+        System.out.println("Page title is: " + title);
         
         chromeDriver.quit();
         
