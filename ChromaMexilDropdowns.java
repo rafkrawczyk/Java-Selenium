@@ -2,6 +2,7 @@ package com.rafal;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,6 +23,9 @@ public class ChromaMexilDropdowns {
 
         // ===== PART 1: Standard dropdown =====
         chromeDriver.get("https://chroma-tech-academy.mexil.it/static_page/");
+
+        String mainWindowHandle = chromeDriver.getWindowHandle();
+        System.out.println("Main window handle: " + mainWindowHandle);
 
         WebElement dropdown1 = wait.until(
             ExpectedConditions.presenceOfElementLocated(
@@ -50,6 +54,23 @@ public class ChromaMexilDropdowns {
                 break;
             }
         }
+
+        WebElement openTabButton = chromeDriver.findElement(By.id("opentab"));
+        openTabButton.click();
+
+        String originalWindow = chromeDriver.getWindowHandle();
+        System.out.println("Original window handle: " + originalWindow);
+
+        Set<String> windowHandles = chromeDriver.getWindowHandles();
+        for (String nextWindow : windowHandles) {
+            chromeDriver.switchTo().window(nextWindow);
+        }
+
+        WebElement testAutomation = wait.until(
+            ExpectedConditions.elementToBeClickable (By.xpath("/html/body/header/div/div[2]/div[1]/div/nav[1]/ul/li[2]/a")));
+        testAutomation.click();
+
+        chromeDriver.switchTo().window(mainWindowHandle);
         
         // ===== PART 2: MDBootstrap custom dropdown =====
         chromeDriver.get("https://mdbootstrap.com/docs/standard/extended/multiselect");
