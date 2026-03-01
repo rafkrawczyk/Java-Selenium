@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -37,6 +38,19 @@ public class ChromaMexilDropdowns {
         select.selectByIndex(2);
         select.selectByValue("option3");
 
+        WebElement alertTextBox = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.cssSelector("input#name")
+            )
+        );
+        alertTextBox.sendKeys("Rafal");
+        WebElement alertButton = chromeDriver.findElement(By.id("alertbtn"));
+        alertButton.click();
+
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        System.out.println("Alert text: " + alert.getText());
+        alert.accept();
+
         WebElement bootstrapDropDown = chromeDriver.findElement(By.xpath("/html/body/div[1]/div[1]/fieldset/div/button"));
         bootstrapDropDown.click();
 
@@ -58,9 +72,6 @@ public class ChromaMexilDropdowns {
         WebElement openTabButton = chromeDriver.findElement(By.id("opentab"));
         openTabButton.click();
 
-        String originalWindow = chromeDriver.getWindowHandle();
-        System.out.println("Original window handle: " + originalWindow);
-
         Set<String> windowHandles = chromeDriver.getWindowHandles();
         for (String nextWindow : windowHandles) {
             chromeDriver.switchTo().window(nextWindow);
@@ -72,6 +83,13 @@ public class ChromaMexilDropdowns {
 
         chromeDriver.switchTo().window(mainWindowHandle);
         
+        WebElement bootstrapDropDown3 = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("/html/body/div[1]/div[1]/fieldset/div/button")
+            )
+        );
+        bootstrapDropDown3.click();
+
         // ===== PART 2: MDBootstrap custom dropdown =====
         chromeDriver.get("https://mdbootstrap.com/docs/standard/extended/multiselect");
 
