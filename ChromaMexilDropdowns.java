@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,12 +23,11 @@ public class ChromaMexilDropdowns {
         chromeDriver.manage().window().maximize();
         chromeDriver.manage().deleteAllCookies();
 
-        // ===== PART 1: Standard dropdown =====
         chromeDriver.get("https://chroma-tech-academy.mexil.it/static_page/");
 
         String mainWindowHandle = chromeDriver.getWindowHandle();
         System.out.println("Main window handle: " + mainWindowHandle);
-
+        
         WebElement dropdown1 = wait.until(
             ExpectedConditions.presenceOfElementLocated(
                 By.id("dropdown-class-example")
@@ -37,6 +37,10 @@ public class ChromaMexilDropdowns {
         select.selectByVisibleText("Option1");
         select.selectByIndex(2);
         select.selectByValue("option3");
+
+        Actions actions = new Actions(chromeDriver);
+        WebElement hoverOver = chromeDriver.findElement(By.id("mousehover"));
+        actions.moveToElement(hoverOver).contextClick().perform();
 
         WebElement alertTextBox = wait.until(
             ExpectedConditions.presenceOfElementLocated(
@@ -90,7 +94,6 @@ public class ChromaMexilDropdowns {
         );
         bootstrapDropDown3.click();
 
-        // ===== PART 2: MDBootstrap custom dropdown =====
         chromeDriver.get("https://mdbootstrap.com/docs/standard/extended/multiselect");
 
         // Handle cookies
