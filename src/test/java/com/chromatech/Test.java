@@ -1,4 +1,4 @@
-package com.chromatech.utils;
+package com.chromatech;
 
 public class Test {
     static void main() {

@@ -1,6 +1,6 @@
-package com.chromatech.utils.stepDefinitions;
+package com.chromatech.stepDefinitions;
 
-import com.chromatech.utils.WebDriverUtils;
+import com.chromatech.WebDriverUtils;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
