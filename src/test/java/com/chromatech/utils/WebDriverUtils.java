@@ -1,4 +1,4 @@
-package com.chromatech;
+package com.chromatech.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
